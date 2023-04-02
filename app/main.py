@@ -31,7 +31,33 @@ def root(request: Request) -> dict:
     )
 
 
-@api_router.get("/recipe/{recipe_id}", status_code=200, response_model=Recipe)
+@api_router.get("/search/", status_code=200, response_model=RecipeSearchResults)
+def search_keywords(
+    *,
+    request: Request,
+    query: Optional[str] = Query(None, min_length=3, example="chicken"),
+    max_results: Optional[int] = 50,
+) -> dict:
+    """
+    Search for documents based on label keyword
+    """
+    if not query:
+        # we use Python list slicing to limit results
+        # based on the max_results query parameter
+        return {"results": RECIPES[:max_results]}
+
+    ### [x] get "ranked doc" by consine similarity
+    # ranked_doc = getRankedDoc(keyword)
+
+    results = filter(lambda recipe: query.lower() in recipe["label"].lower(), RECIPES)
+    # return {"results": list(results)[:max_results]}
+    return TEMPLATES.TemplateResponse(
+        "index.html",
+        {"request": request, "recipes": results},
+    )
+
+
+'''@api_router.get("/recipe/{recipe_id}", status_code=200, response_model=Recipe)
 def fetch_recipe(*, recipe_id: int) -> Any:
     """
     Fetch a single recipe by ID
@@ -46,9 +72,10 @@ def fetch_recipe(*, recipe_id: int) -> Any:
         )
 
     return result[0]
+'''
 
 
-@api_router.get("/search/", status_code=200, response_model=RecipeSearchResults)
+'''@api_router.get("/search/", status_code=200, response_model=RecipeSearchResults)
 def search_recipes(
     *,
     keyword: Optional[str] = Query(None, min_length=3, example="chicken"),
@@ -64,6 +91,7 @@ def search_recipes(
 
     results = filter(lambda recipe: keyword.lower() in recipe["label"].lower(), RECIPES)
     return {"results": list(results)[:max_results]}
+'''
 
 
 @api_router.post("/recipe/", status_code=201, response_model=Recipe)
