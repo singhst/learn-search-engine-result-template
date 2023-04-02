@@ -1,0 +1,64 @@
+alembic @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/2d/3d/b8/e0e13dcde25d9d4c0f78386a00cecbd5619c4b9bc50fa114998c208b5f/alembic-1.8.1-py3-none-any.whl
+anyio @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/ec/44/7c/e5dde5ec0fe7d7e8863abb92fe0ba5a4b0312b43ff43540f193ef11fef/anyio-3.6.1-py3-none-any.whl
+app==0.1.0
+beautifulsoup4 @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/ce/13/0d/ce3a1461e71c67309bbfb28e32ea8186ff7c831d213170cdb54055ea84/beautifulsoup4-4.11.1-py3-none-any.whl
+CacheControl==0.12.11
+cachy==0.3.0
+certifi==2022.6.15
+charset-normalizer==2.1.0
+cleo==0.8.1
+click @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/30/bc/bf/e00ffd8f0edf0294942e70e80e42a839bd2649d2c5b864e6389e526d2a/click-7.1.2-py2.py3-none-any.whl
+clikit==0.6.2
+crashtest==0.3.1
+distlib==0.3.5
+dnspython @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/e4/2c/43/b3878219f9bcf606c3c3b7cdbff10838f2a3baff67a70af404e835a20d/dnspython-2.2.1-py3-none-any.whl
+email-validator @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/3d/3c/56/f0119647aa62ce023e225d27318febffa3e61458705085f6a89fb926ac/email_validator-1.2.1-py2.py3-none-any.whl
+fastapi @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/cc/54/c7/50f4f4b028d797266710b8ee43998ff94c42a56041dbd58d753838fde8/fastapi-0.79.0-py3-none-any.whl
+filelock==3.7.1
+greenlet @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/c4/d7/bd/1189c0e33c2986fa09a8a45b6c6469228e6970d57d699f01c95b811696/greenlet-1.1.2-cp38-cp38-macosx_10_14_x86_64.whl
+h11 @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/eb/ba/70/b75b679c2644bc2a0101325cd08621e2d3f99e82f3fd905ef1fe383907/h11-0.9.0-py2.py3-none-any.whl
+html5lib==1.1
+httptools @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/eb/e9/b3/ad104cd16c377cebba55e784cef8142e003aebbc3c0f581ff5aefa63c7/httptools-0.1.2-cp38-cp38-macosx_10_14_x86_64.whl
+idna==3.3
+importlib-metadata==4.12.0
+importlib-resources @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/3a/2d/e2/c2b4e3cba9abf8b94f4e269203d9798fd7eb42b5b9d240203f3ebbe692/importlib_resources-5.9.0-py3-none-any.whl
+Jinja2 @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/33/db/47/0926a99dba6f131e3566591eed52f286b44bcfddcbe351f4116fc4d26f/Jinja2-3.1.2-py3-none-any.whl
+keyring==23.7.0
+lockfile==0.12.2
+Mako @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/9d/a0/88/63de66418513c9f5f8aacbc46423e71758c5e35852b84fdc0d2b297c70/Mako-1.2.1-py3-none-any.whl
+MarkupSafe @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/91/9b/05/057ca2faee421138dc11ac5f4cb36ea552ed73db287de0c4c41f15b365/MarkupSafe-2.1.1-cp38-cp38-macosx_10_9_x86_64.whl
+msgpack==1.0.4
+numpy @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/02/3e/d7/bfdfb79af020492a40d77ead7c7ed4a86219c6a948813803cced6cf17c/numpy-1.23.1-cp38-cp38-macosx_10_9_x86_64.whl
+packaging==20.9
+pandas @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/7d/e7/9b/28a167ca0e5c366022a6bb6531d6da1465f7f636012dadede7f960f423/pandas-1.4.3-cp38-cp38-macosx_10_9_x86_64.whl
+pastel==0.2.1
+pexpect==4.8.0
+pkginfo==1.8.3
+platformdirs==2.5.2
+poetry==1.1.14
+poetry-core==1.0.8
+ptyprocess==0.7.0
+pydantic @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/d2/99/3c/bffa7ba1ed68effa728f5766fd9b626a4ecf01b7635d3e3ff1c09c6ed8/pydantic-1.8.2-cp38-cp38-macosx_10_9_x86_64.whl
+pylev==1.4.0
+pyparsing==3.0.9
+python-dateutil @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/0f/f1/e2/e1d3399cea26388e2ed5b93ea3e7c137d2b4027c5ba14c64ab839294ed/python_dateutil-2.8.2-py2.py3-none-any.whl
+python-multipart @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/34/1a/77/57e28cd2dc00bc0ec60258333cd5a23b5fffc3cd38f9c6eae0fba81c17/python-multipart-0.0.5.tar.gz
+pytz @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/a8/3e/6e/8a4977a399a303a3f7efcd4499130efd051d4eefb6535ab04c7391d1b6/pytz-2022.1-py2.py3-none-any.whl
+requests==2.28.1
+requests-toolbelt==0.9.1
+shellingham==1.5.0
+six==1.16.0
+sniffio @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/d0/91/b7/e6203dd46faa656f9ddf9a16cfbc3e51a56fa709d69642affedb2e0eff/sniffio-1.2.0-py3-none-any.whl
+soupsieve @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/b4/47/4f/214202b36a5b60c4ab10c2fc16dc96b3ced1dd697a73871df11150ff41/soupsieve-2.3.2.post1-py3-none-any.whl
+SQLAlchemy @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/88/f1/f0/a8a4de9bcb3fc390674a83d09dd1ecbb89ca581bca38b4cc6d8593ed48/SQLAlchemy-1.4.39-cp38-cp38-macosx_10_15_x86_64.whl
+starlette @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/36/bc/9a/ea32c1cba3ec82475b655b3959ecb6fd778c0fd7d4d3b39bcdf6e94579/starlette-0.19.1-py3-none-any.whl
+tenacity @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/44/71/21/397279f8fca199d048595a0942e6b22859b07f13d4e7496ddf932be65d/tenacity-8.0.1-py3-none-any.whl
+tomlkit==0.11.1
+typing_extensions @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/69/7e/7f/bd6599df2b6884385c80a4e64d8140b85cde607b3747b4fc324cb353aa/typing_extensions-4.3.0-py3-none-any.whl
+urllib3==1.26.11
+uvicorn @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/a9/1c/41/98040118a887a7b006b4fcf37f3910d7d7eb3ef465ac8638aca112835f/uvicorn-0.11.8-py3-none-any.whl
+uvloop @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/10/f8/3c/4ef6dec6d9ce845f107291a84ae8e1362164838ebd8024633554b8b98e/uvloop-0.16.0-cp38-cp38-macosx_10_9_x86_64.whl
+virtualenv==20.16.3
+webencodings==0.5.1
+websockets @ file:///Users/Sing/Library/Caches/pypoetry/artifacts/e9/a2/05/3d3f45941ca91fa1530721ec5f30f4fafcc95766f2d2a0d3855fed3337/websockets-8.1-cp38-cp38-macosx_10_9_x86_64.whl
+zipp==3.8.1
