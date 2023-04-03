@@ -107,7 +107,7 @@
                         <div class="relative flex">
                             <h1 class="text-white ">
                                 <!-- The list of keywords displays up to 5 most frequent stemmed keywords (excluding stop words) in the page together with their occurrence frequencies -->
-                                <span>keywords:   </span>
+                                <span>Five most frequent keywords:   </span>
                                 {% for keyword in doc.keywords %}
                                 <span>{{keyword.word}} {{keyword.frequency}}; </span>
                                 {% endfor %}
