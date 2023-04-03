@@ -68,7 +68,7 @@
                                         stroke-linejoin="round" stroke-width="2.5" class="w-4 h-4" viewBox="0 0 24 24">
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
-                                </span>result {{doc.id}}
+                                </span>result {{doc.result_index}}
                             </p>
                         </div>
                     </div>
@@ -108,27 +108,27 @@
                             <h1 class="text-white ">
                                 <!-- The list of keywords displays up to 5 most frequent stemmed keywords (excluding stop words) in the page together with their occurrence frequencies -->
                                 <span>keywords:   </span>
-                                {% for doc in documents %}
-                                <span>{{doc.id}} {{doc.id}}; </span>
+                                {% for keyword in doc.keywords %}
+                                <span>{{keyword.word}} {{keyword.frequency}}; </span>
                                 {% endfor %}
                             </h1>
                         </div>
                         <!-- For Parent links -->
-                        {% for doc in documents %}
+                        {% for link in doc.parent_links %}
                         <div class="relative flex">
                             <button class="text-white">
-                                <a href="{{doc.url}}">
-                                    Parent link: {{doc.url}}
+                                <a href="{{link}}">
+                                    Parent link: {{link}}
                                 </a>
                             </button>
                         </div>
                         {% endfor %}
                         <!-- For Child links -->
-                        {% for doc in documents %}
+                        {% for link in doc.child_links %}
                         <div class="relative flex">
                             <button class="text-white">
-                                <a href="{{doc.url}}">
-                                    Child link: {{doc.url}}
+                                <a href="{{link}}">
+                                    Child link: {{link}}
                                 </a>
                             </button>
                         </div>

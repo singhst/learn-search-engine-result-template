@@ -62,9 +62,12 @@ def search_keywords(
 
     # results = filter(lambda recipe: query.lower() in recipe["label"].lower(), RECIPES)
     results = filter(lambda recipe: query.lower() in recipe["title"].lower(), ranked_doc)
+    results = list(results)
+    results = [{"result_index": i, **doc} for doc, i in zip(results, range(len(results)))]
+    print(results)
     return TEMPLATES.TemplateResponse(
         "index.html",
-        {"request": request, "documents": list(results)[:max_results]},
+        {"request": request, "documents": results[:max_results]},
     )
 
 
