@@ -6,6 +6,7 @@ from pathlib import Path
 
 from app.schemas import RecipeSearchResults, Recipe, RecipeCreate
 from app.recipe_data import RECIPES
+from app.document_sample_data import SAMPLE_DOCUMENTS
 
 
 BASE_PATH = Path(__file__).resolve().parent
@@ -20,7 +21,7 @@ api_router = APIRouter()
 # Updated to serve a Jinja2 template
 # https://www.starlette.io/templates/
 # https://jinja.palletsprojects.com/en/3.0.x/templates/#synopsis
-@api_router.get("/", status_code=200)
+'''@api_router.get("/", status_code=200)
 def root(request: Request) -> dict:
     """
     Root GET
@@ -28,6 +29,15 @@ def root(request: Request) -> dict:
     return TEMPLATES.TemplateResponse(
         "index.html",
         {"request": request, "recipes": RECIPES},
+    )'''
+@api_router.get("/", status_code=200)
+def root(request: Request) -> dict:
+    """
+    Root GET
+    """
+    return TEMPLATES.TemplateResponse(
+        "index.html",
+        {"request": request, "documents": SAMPLE_DOCUMENTS},
     )
 
 
@@ -44,16 +54,17 @@ def search_keywords(
     if not query:
         # we use Python list slicing to limit results
         # based on the max_results query parameter
-        return {"results": RECIPES[:max_results]}
+        return {"results": SAMPLE_DOCUMENTS[:max_results]}
 
-    ### [x] get "ranked doc" by consine similarity
-    # ranked_doc = getRankedDoc(keyword)
+    ### [x] get "ranked doc" by consine similarity between input `query` and documents
+    # ranked_doc = getRankedDoc(query)
+    ranked_doc = SAMPLE_DOCUMENTS
 
-    results = filter(lambda recipe: query.lower() in recipe["label"].lower(), RECIPES)
-    # return {"results": list(results)[:max_results]}
+    # results = filter(lambda recipe: query.lower() in recipe["label"].lower(), RECIPES)
+    results = filter(lambda recipe: query.lower() in recipe["title"].lower(), ranked_doc)
     return TEMPLATES.TemplateResponse(
         "index.html",
-        {"request": request, "recipes": results},
+        {"request": request, "documents": list(results)[:max_results]},
     )
 
 
