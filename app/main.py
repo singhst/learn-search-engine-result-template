@@ -45,7 +45,7 @@ def root(request: Request) -> dict:
 def search_keywords(
     *,
     request: Request,
-    query: Optional[str] = Query(None, min_length=3, example="chicken"),
+    query: Optional[str] = Query(None, min_length=0, example="chicken"),
     max_results: Optional[int] = 50,
 ) -> dict:
     """
@@ -54,7 +54,10 @@ def search_keywords(
     if not query:
         # we use Python list slicing to limit results
         # based on the max_results query parameter
-        return {"results": SAMPLE_DOCUMENTS[:max_results]}
+        return TEMPLATES.TemplateResponse(
+        "index.html",
+        {"request": request, "documents": ""},
+    )
 
     ### [x] get "ranked doc" by consine similarity between input `query` and documents
     # ranked_doc = getRankedDoc(query)
