@@ -1,4 +1,8 @@
-## Part 6 Local Setup
+## Reference link 
+
+https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-database-setup/
+
+## Local Setup
 
 1. `pip install poetry` (or safer, follow the instructions: https://python-poetry.org/docs/#installation)
 2. Install dependencies `cd` into the directory where the `pyproject.toml` is located then `poetry install`

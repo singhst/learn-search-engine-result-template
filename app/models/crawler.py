@@ -6,7 +6,7 @@ from app.db.base_class import Base
 
 
 class Crawler(Base):
-    id                  = Column(Integer,       nullable=False, primary_key=True)
+    url_id                  = Column(Integer,       nullable=False, primary_key=True)
     url                 = Column(String,        nullable=False)
     html_content        = Column(String,        nullable=False)
     # created_at          = Column(DateTime,      default=datetime.datetime.now)
@@ -19,7 +19,7 @@ class Crawler(Base):
 
     def __repr__(self):
         _string = f"""Order(
-            id={self.id!r}, 
+            id={self.url_id!r}, 
             url={self.url!r}, 
             html_content={self.html_content!r})"""
         return _string
