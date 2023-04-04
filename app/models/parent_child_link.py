@@ -6,8 +6,12 @@ from app.db.base_class import Base
 
 
 class Parent_Child_Link(Base):
-    url_id          = Column(Integer,   ForeignKey('crawler.url_id'), nullable=False, primary_key=True)
-    child_url_id    = Column(Integer,   ForeignKey('crawler.url_id'), nullable=False)
+    url_id = Column(Integer,
+                    # ForeignKey('crawler.url_id'),
+                    nullable=False, primary_key=True)
+    child_url_id = Column(Integer,
+                          # ForeignKey('crawler.url_id'),
+                          nullable=False)
     # created_at      = Column(DateTime,      default=datetime.datetime.now)
     # create_by       = Column(String(256),   nullable=True)
     # updated_at      = Column(DateTime,      default=datetime.datetime.now, onupdate=datetime.datetime.now)

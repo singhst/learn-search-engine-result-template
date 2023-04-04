@@ -6,9 +6,13 @@ from app.db.base_class import Base
 
 
 class Doc_Term_1_Gram(Base):
-    url_id          = Column(Integer,   ForeignKey('crawler.url_id'),           nullable=False, primary_key=True)
-    term_id         = Column(Integer,   ForeignKey('term_1_gram.term_id'),   nullable=False, primary_key=True)
-    term_freq       = Column(Integer,   nullable=False)
+    url_id = Column(Integer,
+                    # ForeignKey('crawler.url_id'),
+                    nullable=False, primary_key=True)
+    term_id = Column(Integer,
+                    #  ForeignKey('term_1_gram.term_id'),
+                     nullable=False, primary_key=True)
+    term_freq = Column(Integer,   nullable=False)
     # created_at      = Column(DateTime,      default=datetime.datetime.now)
     # create_by       = Column(String(256),   nullable=True)
     # updated_at      = Column(DateTime,      default=datetime.datetime.now, onupdate=datetime.datetime.now)
