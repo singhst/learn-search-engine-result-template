@@ -3,5 +3,5 @@
 from app.db.base_class import Base  # noqa
 # from app.models.user import User  # noqa
 # from app.models.recipe import Recipe  # noqa
-from app.models.product import Product
-from app.models.order import Order
+from app.models.crawler import Crawler
+from app.models.parent_child_link import Parent_Child_Link
