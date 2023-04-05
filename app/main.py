@@ -37,7 +37,7 @@ def root(request: Request) -> dict:
     """
     Root GET
     """
-    conn=sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
+    conn = sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
     cur = conn.cursor()
     cursor = cur.execute("SELECT version_num from alembic_version")
     for row in cursor:
@@ -72,6 +72,7 @@ def search_keywords(
     # ranked_doc = getRankedDoc(query)
     ranked_doc = SAMPLE_DOCUMENTS
 
+    ### [ FAKE!!! ]
     # results = filter(lambda recipe: query.lower() in recipe["label"].lower(), RECIPES)
     results = filter(lambda recipe: query.lower() in recipe["title"].lower(), ranked_doc)
     results = list(results)
@@ -81,6 +82,26 @@ def search_keywords(
         "index.html",
         {"request": request, "documents": results[:max_results]},
     )
+
+
+@api_router.get("/db/all/", status_code=200)
+def get_db_all(
+    *,
+    max_results: Optional[int] = 10,
+) -> dict:
+    conn = sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
+    conn.row_factory = sqlite3.Row
+    query = """
+        SELECT *
+        FROM crawler
+        INNER JOIN parent_child_link
+            ON parent_child_link.url_id = crawler.url_id
+    """
+    records = conn.execute(query).fetchall()
+    records = [{k: item[k] for k in item.keys()} for item in records]
+    print(records)
+    conn.close()
+    return {"results": records[:max_results]}
 
 
 '''@api_router.get("/recipe/{recipe_id}", status_code=200, response_model=Recipe)
