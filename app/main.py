@@ -1,10 +1,12 @@
-from fastapi import FastAPI, APIRouter, Query, HTTPException, Request
+from fastapi import FastAPI, APIRouter, Query, HTTPException, Request, Depends
 from fastapi.templating import Jinja2Templates
+
+from app.db.session import SQLALCHEMY_DATABASE_NAME
+import sqlite3
 
 from typing import Optional, Any
 from pathlib import Path
 
-from app.schemas import RecipeSearchResults, Recipe, RecipeCreate
 from app.recipe_data import RECIPES
 from app.document_sample_data import SAMPLE_DOCUMENTS
 
@@ -13,7 +15,7 @@ BASE_PATH = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
 
 
-app = FastAPI(title="Recipe API", openapi_url="/openapi.json")
+app = FastAPI(title="Search Engine", openapi_url="/openapi.json")
 
 api_router = APIRouter()
 
@@ -35,13 +37,20 @@ def root(request: Request) -> dict:
     """
     Root GET
     """
+    conn=sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
+    cur = conn.cursor()
+    cursor = cur.execute("SELECT version_num from alembic_version")
+    for row in cursor:
+        print("version_num = ", row[0])
+    conn.close()
+
     return TEMPLATES.TemplateResponse(
         "index.html",
         {"request": request, "documents": SAMPLE_DOCUMENTS},
     )
 
 
-@api_router.get("/search/", status_code=200, response_model=RecipeSearchResults)
+@api_router.get("/search/", status_code=200) ### can ignore schema
 def search_keywords(
     *,
     request: Request,
@@ -49,7 +58,7 @@ def search_keywords(
     max_results: Optional[int] = 50,
 ) -> dict:
     """
-    Search for documents based on label keyword
+    Search for documents based on keywords in query
     """
     if not query:
         # we use Python list slicing to limit results
@@ -59,7 +68,7 @@ def search_keywords(
         {"request": request, "documents": ""},
     )
 
-    ### [x] get "ranked doc" by consine similarity between input `query` and documents
+    ### [x] get "ranked doc" by consine similarity between `input query` and `documents`
     # ranked_doc = getRankedDoc(query)
     ranked_doc = SAMPLE_DOCUMENTS
 
@@ -111,7 +120,7 @@ def search_recipes(
 '''
 
 
-@api_router.post("/recipe/", status_code=201, response_model=Recipe)
+'''@api_router.post("/recipe/", status_code=201, response_model=Recipe)
 def create_recipe(*, recipe_in: RecipeCreate) -> dict:
     """
     Create a new recipe (in memory only)
@@ -126,6 +135,7 @@ def create_recipe(*, recipe_in: RecipeCreate) -> dict:
     RECIPES.append(recipe_entry.dict())
 
     return recipe_entry
+'''
 
 
 app.include_router(api_router)

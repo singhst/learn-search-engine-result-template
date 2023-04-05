@@ -1,8 +1,8 @@
 """Added initial table
 
-Revision ID: 8c755d7e37f4
+Revision ID: 4d74700503b1
 Revises: 
-Create Date: 2023-04-04 19:07:53.118667
+Create Date: 2023-04-05 19:55:57.515657
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8c755d7e37f4'
+revision = '4d74700503b1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,11 @@ def upgrade() -> None:
     sa.Column('url_id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(), nullable=False),
     sa.Column('html_content', sa.String(), nullable=False),
+    sa.PrimaryKeyConstraint('url_id')
+    )
+    op.create_table('doc_info',
+    sa.Column('url_id', sa.Integer(), nullable=False),
+    sa.Column('size_of_page', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('url_id')
     )
     op.create_table('doc_term_1_gram',
@@ -38,11 +43,12 @@ def upgrade() -> None:
     op.create_table('parent_child_link',
     sa.Column('url_id', sa.Integer(), nullable=False),
     sa.Column('child_url_id', sa.Integer(), nullable=False),
-    sa.PrimaryKeyConstraint('url_id')
+    sa.PrimaryKeyConstraint('url_id', 'child_url_id')
     )
     op.create_table('term_1_gram',
     sa.Column('term_id', sa.Integer(), nullable=False),
     sa.Column('term', sa.String(), nullable=False),
+    sa.Column('doc_freq', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('term_id')
     )
     # ### end Alembic commands ###
@@ -54,5 +60,6 @@ def downgrade() -> None:
     op.drop_table('parent_child_link')
     op.drop_table('doc_total_number')
     op.drop_table('doc_term_1_gram')
+    op.drop_table('doc_info')
     op.drop_table('crawler')
     # ### end Alembic commands ###

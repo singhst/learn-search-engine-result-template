@@ -7,6 +7,7 @@ config = configparser.ConfigParser()
 config.read(full_config_file_path)
 
 SQLALCHEMY_DATABASE_URI = config["sqlite"].get("connection_str") #"sqlite:///example.db"    #database connection string
+SQLALCHEMY_DATABASE_NAME = config["sqlite"].get("db") #database name
 
 # [For SQLite connection]
 engine = create_engine(

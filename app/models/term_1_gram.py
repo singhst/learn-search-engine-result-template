@@ -8,6 +8,7 @@ from app.db.base_class import Base
 class Term_1_Gram(Base):
     term_id         = Column(Integer,   nullable=False, primary_key=True)
     term            = Column(String,    nullable=False)
+    doc_freq        = Column(Integer,   nullable=False)
     # created_at          = Column(DateTime,      default=datetime.datetime.now)
     # create_by           = Column(String(256),   nullable=True)
     # updated_at          = Column(DateTime,      default=datetime.datetime.now, onupdate=datetime.datetime.now)
@@ -19,5 +20,6 @@ class Term_1_Gram(Base):
     def __repr__(self):
         _string = f"""Term_1_Gram(
             term_id={self.term_id!r}, 
-            term={self.term!r})"""
+            term={self.term!r}),
+            doc_freq={self.doc_freq!r}"""
         return _string
