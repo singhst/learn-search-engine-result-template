@@ -14,7 +14,7 @@ To stop the server, press CTRL+C
 
 If you get stuck, checkout the [troubleshooting readme](../troubleshooting/README.md)
 
-
+---
 ## Deal with SQLite DB
 
 1. Keep the empty sqlite .db file under root folder ==> `./search_engine.db`
