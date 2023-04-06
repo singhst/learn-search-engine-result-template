@@ -101,34 +101,34 @@
                         </div>
                         <div class="relative flex">
                             <h1 class="text-white ">
-                                <span>last modification date: {{doc.last_modification_date}}, size of page: {{doc.size_of_page}} </span>
+                                <span>last modification date: <u>{{doc.last_modification_date}}</u>, size of page: <u>{{doc.size_of_page}}</u> </span>
                             </h1>
                         </div>
                         <div class="relative flex">
                             <h1 class="text-white ">
                                 <!-- The list of keywords displays up to 5 most frequent stemmed keywords (excluding stop words) in the page together with their occurrence frequencies -->
-                                <span>Five most frequent keywords:   </span>
+                                <span>Keywords:   </span>
                                 {% for keyword in doc.keywords %}
-                                <span>{{keyword.word}} {{keyword.frequency}}; </span>
+                                <span><u>{{keyword.term}}</u>({{keyword.term_freq}}); </span>
                                 {% endfor %}
                             </h1>
                         </div>
                         <!-- For Parent links -->
-                        {% for link in doc.parent_links %}
+                        {% for parent_link in doc.parent_links %}
                         <div class="relative flex">
                             <button class="text-white">
-                                <a href="{{link}}">
-                                    Parent link: {{link}}
+                                <a href="{{parent_link.url}}">
+                                    Parent link: <u>{{parent_link.url}}</u>
                                 </a>
                             </button>
                         </div>
                         {% endfor %}
                         <!-- For Child links -->
-                        {% for link in doc.child_links %}
+                        {% for child_link in doc.child_links %}
                         <div class="relative flex">
                             <button class="text-white">
-                                <a href="{{link}}">
-                                    Child link: {{link}}
+                                <a href="{{child_link.url}}">
+                                    Child link: <u>{{child_link.url}}</u>
                                 </a>
                             </button>
                         </div>

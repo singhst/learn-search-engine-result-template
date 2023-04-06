@@ -93,9 +93,9 @@ def get_db_all(
     conn.row_factory = sqlite3.Row
     query = """
         SELECT *
-        FROM crawler
+        FROM doc_info
         INNER JOIN parent_child_link
-            ON parent_child_link.url_id = crawler.url_id
+            ON parent_child_link.url_id = doc_info.url_id
     """
     records = conn.execute(query).fetchall()
     records = [{k: item[k] for k in item.keys()} for item in records]
