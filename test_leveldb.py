@@ -76,3 +76,4 @@ if __name__ == "__main__":
 # bytearray(b'3') bytearray(b'Mark')
 # Get the name of student whose sid = 3.
 # bytearray(b'Mark')
+# [(bytearray(b'2'), bytearray(b'Bob')), (bytearray(b'3'), bytearray(b'Mark'))]
