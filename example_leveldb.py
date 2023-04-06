@@ -42,6 +42,8 @@ if __name__ == "__main__":
     print(str(1).encode())
     insert(db, 1, "Alice")
     insert(db, 2, "Bob")
+    insert(db, 2, "xxxxx")
+    insert(db, 2, "yyyy")
     insert(db, 3, "Peter")
     display(db)
 
@@ -52,6 +54,10 @@ if __name__ == "__main__":
     print("Update the record where sid = 3.")
     update(db, 3, "Mark")
     display(db)
+
+    print("Get the name of student whose sid = 2.")
+    name = search(db, 2)
+    print(name)
 
     print("Get the name of student whose sid = 3.")
     name = search(db, 3)
