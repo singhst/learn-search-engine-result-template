@@ -8,7 +8,7 @@ https://zhuanlan.zhihu.com/p/32229953
 import leveldb
 import os, sys
 
-db_path = "./leveldb_database"
+db_path = "./sample_leveldb_database"
 
 def initialize():
     db = leveldb.LevelDB(db_path)
@@ -31,28 +31,35 @@ def display(db):
     for key, value in db.RangeIter():
         print (key, value)
 
-db = initialize()
+def return_all(db):
+    return list(db.RangeIter())
 
-print("Insert 3 records.")
-print(str(1).encode())
-insert(db, 1, "Alice")
-insert(db, 2, "Bob")
-insert(db, 3, "Peter")
-display(db)
 
-print("Delete the record where sid = 1.")
-delete(db, 1)
-display(db)
+if __name__ == "__main__":
+    db = initialize()
 
-print("Update the record where sid = 3.")
-update(db, 3, "Mark")
-display(db)
+    print("Insert 3 records.")
+    print(str(1).encode())
+    insert(db, 1, "Alice")
+    insert(db, 2, "Bob")
+    insert(db, 3, "Peter")
+    display(db)
 
-print("Get the name of student whose sid = 3.")
-name = search(db, 3)
-print(name)
+    print("Delete the record where sid = 1.")
+    delete(db, 1)
+    display(db)
 
-# os.system(f"rm -r {db_path}")
+    print("Update the record where sid = 3.")
+    update(db, 3, "Mark")
+    display(db)
+
+    print("Get the name of student whose sid = 3.")
+    name = search(db, 3)
+    print(name)
+
+    print(return_all(db))
+
+    # os.system(f"rm -r {db_path}")
 
 ### Output
 # (venv) Sing:learn-search-engine-result-template Sing$ venv/bin/python test_leveldb.py 
