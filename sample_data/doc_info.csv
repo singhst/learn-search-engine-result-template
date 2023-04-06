@@ -1,0 +1,4 @@
+url_id,url,title,last_modification_date,size_of_page,html_content
+1,"http://1.com","title1","xxxxxxxx 1",324,"content1"
+2,"http://2.com","title2","xxxxxxxx 2",91238,"content2"
+3,"http://3.com","title3","xxxxxxxx 3",47,"content3"
