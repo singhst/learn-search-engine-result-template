@@ -1,4 +1,4 @@
-from typing import Type, List
+from typing import Type, List, Union
 import sqlite3
 from sqlite3 import Connection
 
@@ -59,12 +59,6 @@ def insert_data(connection: Type[Connection]):
 def select_as_list_of_dict(connection: Type[Connection]) -> List[dict]:
     ### query data as `list of dict` from DB
     connection.row_factory = sqlite3.Row
-    # query = """
-    #     SELECT *
-    #     FROM crawler
-    #     INNER JOIN parent_child_link
-    #         ON parent_child_link.url_id = crawler.url_id
-    # """
     query = """
         SELECT * FROM example_table WHERE treatment = 'Experimental'
     """

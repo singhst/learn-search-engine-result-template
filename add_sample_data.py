@@ -1,9 +1,8 @@
 import pandas as pd
 
 ### Crawler
-CRAWLER             = pd.read_csv('sample_data/crawler.csv', dtype={"url_id":int, "url":str, "html_content":str})
+DOC_INFO            = pd.read_csv('sample_data/doc_info.csv', dtype={"url_id":int, "url":str, "title":str, "last_modification_date":str, "size_of_page":int, "html_content":str})
 PARENT_CHILD_LINK   = pd.read_csv('sample_data/parent_child_link.csv', dtype={"url_id":int, "child_url_id":int})
-DOC_INFO            = pd.read_csv('sample_data/doc_info.csv', dtype={"url_id":int, "size_of_page":int})
 DOC_TOTAL_NUMBER    = pd.read_csv('sample_data/doc_total_number.csv', dtype={"id":int, "n":int})
 ### Indexer
 DOC_TERM_1_GRAM     = pd.read_csv('sample_data/doc_term_1_gram.csv', dtype={"url_id":int, "term_id":int, "term_freq":int})
@@ -11,9 +10,8 @@ TERM_1_GRAM         = pd.read_csv('sample_data/term_1_gram.csv', dtype={"term_id
 
 SAMPLE_DATASET = {
     ### Crawler
-    "crawler": CRAWLER, 
-    "parent_child_link": PARENT_CHILD_LINK,
     "doc_info": DOC_INFO,
+    "parent_child_link": PARENT_CHILD_LINK,
     "doc_total_number": DOC_TOTAL_NUMBER,
     ### Indexer
     "doc_term_1_gram": DOC_TERM_1_GRAM,

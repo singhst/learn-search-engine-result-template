@@ -7,10 +7,10 @@ from app.db.base_class import Base
 
 class Parent_Child_Link(Base):
     url_id = Column(Integer,
-                    # ForeignKey('crawler.url_id'),
+                    # ForeignKey('doc_info.url_id'),
                     nullable=False, primary_key=True)
     child_url_id = Column(Integer,
-                          # ForeignKey('crawler.url_id'),
+                          # ForeignKey('doc_info.url_id'),
                           nullable=False, primary_key=True)
     # created_at      = Column(DateTime,      default=datetime.datetime.now)
     # create_by       = Column(String(256),   nullable=True)
@@ -18,7 +18,7 @@ class Parent_Child_Link(Base):
     # update_by       = Column(String(256),   nullable=True)
 
     crawler = relationship(
-        "Cralwer",
+        "Doc_Info",
         cascade="all,delete-orphan",
         back_populates="parent_child_link",
         uselist=True,
@@ -28,7 +28,7 @@ class Parent_Child_Link(Base):
 
 
     def __repr__(self):
-        _string = f"""Product(
+        _string = f"""Parent_Child_Link(
             url_id={self.url_id!r}, 
             child_url_id={self.child_url_id!r})"""
         return _string

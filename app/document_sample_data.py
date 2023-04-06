@@ -1,6 +1,6 @@
 SAMPLE_DOCUMENTS = [
     {
-        "id": 1,
+        "url_id": 1,
         "score": "0.90123",
         "title": "Chicken Vesuvio",
         "url": "http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html",
@@ -17,7 +17,7 @@ SAMPLE_DOCUMENTS = [
         "child_links": ["c_link1", "c_link2", "c_link3", "c_link4", "c_link5"],
     },
     {
-        "id": 2,
+        "url_id": 2,
         "score": "0.88472",
         "title": "Chicken Paprikash",
         "url": "http://norecipes.com/recipe/chicken-paprikash/",
@@ -34,7 +34,7 @@ SAMPLE_DOCUMENTS = [
         "child_links": ["c_link1", "c_link2"],
     },
     {
-        "id": 3,
+        "url_id": 3,
         "score": "0.50795",
         "title": "Cauliflower and Tofu Curry Recipe",
         "url": "http://www.seriouseats.com/recipes/2011/02/cauliflower-and-tofu-curry-recipe.html",
