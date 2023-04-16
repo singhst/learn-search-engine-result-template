@@ -1,19 +1,20 @@
 import math
 from sqlitedict import SqliteDict
+from typing import List
 
-url2pageID = SqliteDict('../db/url2pageID.sqlite')
-pageID2Url = SqliteDict('../db/pageID2Url.sqlite')
-pageID2Meta = SqliteDict('../db/pageID2Meta.sqlite')
-pageID2Parent = SqliteDict('../db/pageID2Parent.sqlite')
-forwardIndex = SqliteDict('../db/forwardIndex.sqlite')
-docNorm = SqliteDict('../db/docNorm.sqlite')
-word2wordID = SqliteDict('../db/word2wordID.sqlite')
-wordID2word = SqliteDict('../db/wordID2word.sqlite')
-invertedIndex = SqliteDict('../db/invertedIndex.sqlite')
-title2TitleID = SqliteDict('../db/title2TitleID.sqlite')
-forwardIndexTitle = SqliteDict('../db/forwardIndexTitle.sqlite')
-invertedIndexTitle = SqliteDict('../db/invertedIndexTitle.sqlite')
-titleNorm = SqliteDict('../db/titleNorm.sqlite')
+url2pageID = SqliteDict('./app/db/url_to_pageID.sqlite')
+pageID2Url = SqliteDict('./app/db/pageID_to_url.sqlite')
+pageID2Meta = SqliteDict('./app/db/pageID_details.sqlite')
+pageID2Parent = SqliteDict('./app/db/pageID_to_parentID.sqlite')
+forwardIndex = SqliteDict('./app/db/body_forward_index.sqlite')
+docNorm = SqliteDict('./app/db/body_norm.sqlite')
+word2wordID = SqliteDict('./app/db/body_word_to_wordID.sqlite')
+wordID2word = SqliteDict('./app/db/body_wordID_to_word.sqlite')
+invertedIndex = SqliteDict('./app/db/body_inverted_index.sqlite')
+title2TitleID = SqliteDict('./app/db/title_word_to_wordID.sqlite')
+forwardIndexTitle = SqliteDict('./app/db/title_forward_index.sqlite')
+invertedIndexTitle: SqliteDict = SqliteDict('./app/db/title_inverted_index.sqlite')
+titleNorm = SqliteDict('./app/db/title_norm.sqlite')
 
 # def docID2UrlName(doc_id):
 #     return list(url2pageID.keys())[list(url2pageID.values()).index(int(doc_id))]
@@ -52,7 +53,7 @@ def format_result(cos_sim_list):
     return query_results
 
 """"To-do retrive function. Should return a dictionary with output like phase 1"""
-def retrive(queries):
+def retrive(queries: List[str]):
     # queries = ["comput", "scienc"]
     #########################################################################
     title_score_dict = {}
@@ -60,6 +61,7 @@ def retrive(queries):
     for query in queries:
         if query in title2TitleID.keys():
             title_id = title2TitleID[query]
+            print(f">>> retrive() | title_id: {title_id}; type(title_id): {type(title_id)}")
         else:
             print("Title word not indexed:", query)
             continue
@@ -172,4 +174,3 @@ def getFreqWordAsQueryList(doc_id):
     word_freq_list = sorted(list(word_freq.items()), key=lambda x: x[1], reverse=True)
     top_5 = [w[0] for w in word_freq_list[:5]]
     return top_5
-    

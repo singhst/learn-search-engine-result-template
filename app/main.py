@@ -1,13 +1,11 @@
 from fastapi import FastAPI, APIRouter, Query, HTTPException, Request, Depends
 from fastapi.templating import Jinja2Templates
 
-from app.db.session import SQLALCHEMY_DATABASE_NAME
-import sqlite3
+from app.search import views
 
 from typing import Optional, Any
 from pathlib import Path
 
-from app.recipe_data import RECIPES
 from app.document_sample_data import SAMPLE_DOCUMENTS
 
 
@@ -37,24 +35,52 @@ def root(request: Request) -> dict:
     """
     Root GET
     """
-    conn = sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
-    cur = conn.cursor()
-    cursor = cur.execute("SELECT version_num from alembic_version")
-    for row in cursor:
-        print("version_num = ", row[0])
-    conn.close()
-
     return TEMPLATES.TemplateResponse(
         "index.html",
-        {"request": request, "documents": SAMPLE_DOCUMENTS},
+        {
+            "request": request,
+            # "documents": SAMPLE_DOCUMENTS
+        },
     )
 
 
-@api_router.get("/search/", status_code=200) ### can ignore schema
+@api_router.get("/search", status_code=200) ### can ignore schema
 def search_keywords(
     *,
     request: Request,
-    query: Optional[str] = Query(None, min_length=0, example="chicken"),
+    query: Optional[str] = Query(None, min_length=0, example=["comput", "scienc"]),
+    max_results: Optional[int] = 50,
+) -> dict:
+    """
+    Search for documents based on keywords in query
+    """
+    if not query:
+        # we use Python list slicing to limit results
+        # based on the max_results query parameter
+        return TEMPLATES.TemplateResponse(
+        "index.html",
+        {"request": request, "documents": ""},
+    )
+
+    print(">>> main.py | search_keywords() | Origin query: {}".format(query))
+
+    ### [x] get "ranked doc" by consine similarity between `input query` and `documents`
+    # ranked_doc = get_ranked_doc(query)
+    query_results = views.result(query)
+    print(">>> main.py | search_keywords() | str(query_results)[:50]: {}".format(str(query_results)[:50]))
+
+    # return query_results
+    return TEMPLATES.TemplateResponse(
+        "index.html",
+        {"request": request, "documents": query_results[:max_results]},
+    )
+
+
+@api_router.get("/search/test", status_code=200) ### can ignore schema
+def search_keywords_test(
+    *,
+    request: Request,
+    query: Optional[str] = Query(None, min_length=0, example=["comput", "scienc"]),
     max_results: Optional[int] = 50,
 ) -> dict:
     """
@@ -84,24 +110,24 @@ def search_keywords(
     )
 
 
-@api_router.get("/db/all/", status_code=200)
-def get_db_all(
-    *,
-    max_results: Optional[int] = 10,
-) -> dict:
-    conn = sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
-    conn.row_factory = sqlite3.Row
-    query = """
-        SELECT *
-        FROM doc_info
-        INNER JOIN parent_child_link
-            ON parent_child_link.url_id = doc_info.url_id
-    """
-    records = conn.execute(query).fetchall()
-    records = [{k: item[k] for k in item.keys()} for item in records]
-    print(records)
-    conn.close()
-    return {"results": records[:max_results]}
+# @api_router.get("/db/all/", status_code=200)
+# def get_db_all(
+#     *,
+#     max_results: Optional[int] = 10,
+# ) -> dict:
+#     conn = sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
+#     conn.row_factory = sqlite3.Row
+#     query = """
+#         SELECT *
+#         FROM doc_info
+#         INNER JOIN parent_child_link
+#             ON parent_child_link.url_id = doc_info.url_id
+#     """
+#     records = conn.execute(query).fetchall()
+#     records = [{k: item[k] for k in item.keys()} for item in records]
+#     print(records)
+#     conn.close()
+#     return {"results": records[:max_results]}
 
 
 '''@api_router.get("/recipe/{recipe_id}", status_code=200, response_model=Recipe)
