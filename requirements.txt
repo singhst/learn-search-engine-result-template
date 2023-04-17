@@ -63,6 +63,7 @@ six==1.16.0
 sniffio==1.2.0
 soupsieve==2.3.2.post1
 SQLAlchemy==1.4.39
+sqlitedict==2.1.0
 starlette==0.19.1
 tenacity==8.0.1
 threadpoolctl==3.1.0

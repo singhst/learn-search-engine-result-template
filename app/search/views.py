@@ -1,5 +1,5 @@
 from typing import List
-from app.search.scripts import utils, retrivedb
+from app.search.scripts import utils, similarity_query
 from pathlib import Path
 
 BASE_PATH = Path(__file__).resolve().parent
@@ -16,19 +16,12 @@ def result(query: List[str]):
     queries = utils.splitQuery(query)
     # Clean, stem ...
     queries = utils.clean(queries)
-    print(">>> view.py | result() | Processed query: {}".format(queries))
+    print(">>> view.py | result() | Processed query: `{}`".format(queries))
     
     print(">>> view.py | result() | Retriving pages ...")
-    query_results = retrivedb.retrive(queries)
-    """Peter's retrive function"""
-    # peter_results = cosineSimilarity.runQuery(queries)
-    # query_results = retrivedb.reformatPeterResult(peter_results)
+    query_results = similarity_query.retrive_func(queries)
     return query_results
 
-
-# def remote(request, page_id):
-#     template = "./search/html/" + str(page_id) + ".html"
-#     return render(request, template)
 
 # def similar(request):
 #     if request.method == 'GET':

@@ -1,3 +1,4 @@
+'''
 SAMPLE_DOCUMENTS = [
     {
         "url_id": 1,
@@ -14,15 +15,15 @@ SAMPLE_DOCUMENTS = [
             {"word": "w5", "frequency": 7},
         ],
         "parent_links": [
-            {"url_id": 1, "link": "p_link1"},
-            {"url_id": 1, "link": "p_link2"},
+            {"url_id": 1, "url": "p_link1"},
+            {"url_id": 1, "url": "p_link2"},
         ],
         "child_links": [
-            {"url_id": 1, "link": "c_link1"},
-            {"url_id": 1, "link": "c_link2"},
-            {"url_id": 1, "link": "c_link3"},
-            {"url_id": 1, "link": "c_link4"},
-            {"url_id": 1, "link": "c_link5"},
+            {"url_id": 1, "url": "c_link1"},
+            {"url_id": 1, "url": "c_link2"},
+            {"url_id": 1, "url": "c_link3"},
+            {"url_id": 1, "url": "c_link4"},
+            {"url_id": 1, "url": "c_link5"},
         ]
     },
     {
@@ -40,14 +41,14 @@ SAMPLE_DOCUMENTS = [
             {"word": "w5", "frequency": 238},
         ],
         "parent_links": [
-            {"url_id": 2, "link": "p_link1"},
-            {"url_id": 2, "link": "p_link2"},
-            {"url_id": 2, "link": "p_link3"},
-            {"url_id": 2, "link": "p_link4"},
+            {"url_id": 2, "url": "p_link1"},
+            {"url_id": 2, "url": "p_link2"},
+            {"url_id": 2, "url": "p_link3"},
+            {"url_id": 2, "url": "p_link4"},
         ],
         "child_links": [
-            {"url_id": 2, "link": "c_link1"},
-            {"url_id": 2, "link": "c_link2"},
+            {"url_id": 2, "url": "c_link1"},
+            {"url_id": 2, "url": "c_link2"},
         ]
     },
     {
@@ -65,15 +66,16 @@ SAMPLE_DOCUMENTS = [
             {"word": "w5", "frequency": 17},
         ],
         "parent_links": [
-            {"url_id": 2, "link": "p_link1"},
-            {"url_id": 2, "link": "p_link2"},
-            {"url_id": 2, "link": "p_link3"},
+            {"url_id": 2, "url": "p_link1"},
+            {"url_id": 2, "url": "p_link2"},
+            {"url_id": 2, "url": "p_link3"},
         ],
         "child_links": [
-            {"url_id": 2, "link": "c_link1"},
+            {"url_id": 2, "url": "c_link1"},
         ]
     },
 ]
+'''
 
 SAMPLE_DOCUMENTS = [
     {

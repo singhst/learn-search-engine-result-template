@@ -44,7 +44,7 @@ def root(request: Request) -> dict:
     )
 
 
-@api_router.get("/search", status_code=200) ### can ignore schema
+@api_router.get("/search", status_code=200)
 def search_keywords(
     *,
     request: Request,
@@ -67,16 +67,21 @@ def search_keywords(
     ### [x] get "ranked doc" by consine similarity between `input query` and `documents`
     # ranked_doc = get_ranked_doc(query)
     query_results = views.result(query)
-    print(">>> main.py | search_keywords() | str(query_results)[:50]: {}".format(str(query_results)[:50]))
+    print(">>> main.py | search_keywords() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
 
+    query_results = query_results[:max_results]
+    documents_num = len(query_results)
+    print(">>> main.py | search_keywords() | len(query_results): {}".format(len(query_results)))
+
+    query_results = [{"result_index": i+1, **doc} for doc, i in zip(query_results, range(len(query_results)))]
     # return query_results
     return TEMPLATES.TemplateResponse(
         "index.html",
-        {"request": request, "documents": query_results[:max_results]},
+        {"request": request, "query": query, "documents_num": documents_num, "documents": query_results},
     )
 
 
-@api_router.get("/search/test", status_code=200) ### can ignore schema
+@api_router.get("/search/test", status_code=200)
 def search_keywords_test(
     *,
     request: Request,
@@ -192,4 +197,4 @@ if __name__ == "__main__":
     # Use this for debugging purposes only
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8001, log_level="debug")
+    uvicorn.run(app, host="localhost", port=8001, log_level="debug")
