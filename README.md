@@ -1,10 +1,4 @@
-## Reference link 
-
-https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-database-setup/
-
----
-
-## Local Setup for running
+# Local Setup for running
 
 1. Current path:
     ```shell
@@ -20,3 +14,13 @@ https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-da
 To stop the server, press CTRL+C
 
 If you get stuck, checkout the [troubleshooting readme](../troubleshooting/README.md)
+
+# Demo Video
+
+https://user-images.githubusercontent.com/71545537/232531740-f6a453c8-545f-48b7-9ec7-dd93c0fe338e.mp4
+
+---
+
+## Reference link 
+
+[link](https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-database-setup/)
