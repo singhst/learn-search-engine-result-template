@@ -10,17 +10,17 @@ def result(query: List[str]):
     queries = utils.splitQuery(query)
     # Clean, stem ...
     queries = utils.clean(queries)
-    print(">>> view.py | result() | Processed query: `{}`".format(queries))
+    print(">>> retrieve.py | result() | Processed query: `{}`".format(queries))
     
-    print(">>> view.py | result() | Retriving pages ...")
+    print(">>> retrieve.py | result() | Retriving pages ...")
     query_results = similarity_query.retrive_func(queries)
     return query_results
 
 
 def similar(page_id: str):
     queries = similarity_query.getTop5_FreqWord(page_id)
-    print(">>> view.py | similar() | getTop5_FreqWord() query: `{}`".format(queries))
+    print(">>> retrieve.py | similar() | getTop5_FreqWord() query: `{}`".format(queries))
     
-    print(">>> view.py | similar() | Retriving pages ...")
+    print(">>> retrieve.py | similar() | Retriving pages ...")
     query_results = similarity_query.retrive_func(queries)
     return query_results, queries

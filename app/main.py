@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter, Query, Request
 from fastapi.templating import Jinja2Templates
 
-from app.search import views
+from app.search import retrieve
 
 from typing import Optional
 from pathlib import Path
@@ -65,7 +65,7 @@ def search_keywords(
     print(">>> main.py | search_keywords() | Origin query: {}".format(query))
     
     ### get "ranked doc" by cosine similarity between `input query` and `documents`
-    query_results = views.result(query)
+    query_results = retrieve.result(query)
     print(">>> main.py | search_keywords() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
     
     query_results = query_results[:max_results]
@@ -139,7 +139,7 @@ def get_similar_pages(
     print(">>> main.py | get_similar_pages() | Origin query: {}".format(page_id))
     
     ### get "ranked doc" by cosine similarity between `input query` and `documents`
-    query_results, top5_keywords = views.similar(page_id)
+    query_results, top5_keywords = retrieve.similar(page_id)
     print(">>> main.py | get_similar_pages() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
     
     query_results = query_results[:max_results]
