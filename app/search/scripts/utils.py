@@ -1,12 +1,9 @@
 import re
-import math
-from search.scripts import porter
+from app.search.scripts import porter
 from string import punctuation
-from nltk import pos_tag, word_tokenize
 
-from sqlitedict import SqliteDict
 
-stopwords = set([line.rstrip('\n') for line in open('../stopwords.txt')])
+stopwords = set([line.rstrip('\n') for line in open('./stopwords.txt')])
 
 
 # split should be list with length >= 2
