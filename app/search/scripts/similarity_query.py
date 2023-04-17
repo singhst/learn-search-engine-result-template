@@ -1,3 +1,4 @@
+from typing import List, Dict, Union
 import math
 from sqlitedict import SqliteDict
 
@@ -14,7 +15,7 @@ stopwords = set([rows.rstrip('\n') for rows in stopword_file])
 print("stopwords:", stopwords)  # for checking
 
 
-# read dictionaries 
+# read dictionaries
 url_to_pageID = SqliteDict('./app/db/url_to_pageID.sqlite')
 pageID_to_url = SqliteDict('./app/db/pageID_to_url.sqlite')
 
@@ -41,14 +42,14 @@ pageID_details = SqliteDict('./app/db/pageID_details.sqlite')
 # split query for pharse with quotation marks
 def split_query_quot(queries):
     reg_exp_quot = re.compile("\"(?:\w+(?: )?)+\"|\w+")
-    matched_reg = re.findall(reg_exp_quot, queries)     
+    matched_reg = re.findall(reg_exp_quot, queries)
     num_query = len(matched_reg)
     for i in range(num_query):
         if "\"" in matched_reg[i]:
             matched_reg[i] = matched_reg[i].replace("\"", "")
             splits = matched_reg[i].split()
             matched_reg.extend(splits)
-    return matched_reg       
+    return matched_reg
 
 # convert splits to string
 def split_to_str(splits):
@@ -76,7 +77,7 @@ def clean_stem_query (tokens):
     return tokens
 
 
-def display_query_results(cos_sim_list_result):
+def display_query_results(cos_sim_list_result) -> List[Dict[str,Union[int,float,str,dict]]]:
     query_results = []
     for page in cos_sim_list_result:
         pageID , score = page[0] , page[1] 
@@ -84,7 +85,7 @@ def display_query_results(cos_sim_list_result):
         title = pageID_details[pageID][0]
         url_full = pageID_to_url[str(pageID)]
         last_modified_date = pageID_details[pageID][1]
-        size = pageID_details[pageID][2]               
+        size = pageID_details[pageID][2]
         word_freq = pageID_details[pageID][3]
         # key words
         word_freq_list = sorted(list(word_freq.items()), key=lambda x: x[1], reverse=True)
@@ -98,7 +99,7 @@ def display_query_results(cos_sim_list_result):
         # all_results = [score, title, url_full, pageID,last_modified_date, size, 
         #           word_freq_list_top_5, parent, child]
         all_results = {
-            "url_id": pageID,
+            "page_id": pageID,
             "score": score,
             "title": title,
             "url": url_full,
@@ -108,13 +109,12 @@ def display_query_results(cos_sim_list_result):
             "parent_links": [{"url": url} for url in parent],
             "child_links": [{"url": url} for url in child],
         }
-
         query_results.append(all_results)
     return query_results
 
 
 # retrival function for query
-def retrive_func(queries):
+def retrive_func(queries: List[str]):
     # compute for title
     title_query_score = {}
     title_wordID = -1
@@ -123,7 +123,7 @@ def retrive_func(queries):
             print("Word not indexed in title:", query)
             continue
         else:
-            title_wordID = title_word_to_wordID[query]                      
+            title_wordID = title_word_to_wordID[query]
         # retrieve posting list using wordID in page title
         posting_list = title_inverted_index[title_wordID]
         #print(posting_list) # check
@@ -135,9 +135,9 @@ def retrive_func(queries):
                 title_query_score[pageID] = [tf_idf * 1, 1]
             else:
                 title_query_score[pageID][0] += tf_idf * 1
-                title_query_score[pageID][1] += 1    
+                title_query_score[pageID][1] += 1
     cos_sim_title = title_query_score.copy() # cosine sim as compared with title
-
+    
     for pageID, score in title_query_score.items():
         title_norm_cos = title_norm[pageID]
         inner_prod = float(title_query_score[pageID][0])
@@ -147,7 +147,7 @@ def retrive_func(queries):
         except ZeroDivisionError:
             print("ZeroDivisionError")
             cos_sim_title[pageID] = 0
-
+    
     # similarly compute for page body
     body_query_score = {}
     body_wordID = -1
@@ -156,7 +156,7 @@ def retrive_func(queries):
             print("Not indexed in page body:", query)
             continue
         else:
-            body_wordID = body_word_to_wordID[query]      
+            body_wordID = body_word_to_wordID[query]
         # retrieve posting list using wordID in page body
         posting_list = body_inverted_index[body_wordID]
         
@@ -176,13 +176,13 @@ def retrive_func(queries):
         inner_prod = float(body_query_score[pageID][0])
         doc_norm = body_norm[pageID]
         query_norm = math.sqrt(body_query_score[pageID][1])
- 
+        
         try:
             cos_sim_body[pageID] = inner_prod / (query_norm * doc_norm)
         except ZeroDivisionError:
             print("ZeroDivisionError")
-            cos_sim_body[pageID] = 0            
-
+            cos_sim_body[pageID] = 0
+    
     #########################################################################
     # combine both page title and body
     cos_sim_combined = cos_sim_body.copy()
@@ -191,7 +191,7 @@ def retrive_func(queries):
             cos_sim_combined[pageID] = score * 0.7
         else:
             cos_sim_combined[pageID] += score* 0.7 + cos_sim_combined[pageID]*0.3 #weighted average
-
+    
     # sort and filter top 50 pages for display
     cos_sim_combined_list = list(cos_sim_combined.items())
     cos_sim_list_sorted = sorted(cos_sim_combined_list, key=lambda x: x[1], reverse=True)
@@ -208,6 +208,7 @@ def getTop5_FreqWord(pageID):
     word_freq_list_sorted = sorted(list(word_freq.items()), key=lambda x: x[1], reverse=True)
     top_five_word = [w[0] for w in word_freq_list_sorted[:5]]
     return top_five_word
+
 
 def reformulate(original_results):
     reformulated = []

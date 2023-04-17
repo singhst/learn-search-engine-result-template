@@ -23,6 +23,10 @@
                     <button type="submit" class="search-button">Search</button>
                 </form>
                 <h3 class="mb-12 text-2xl font-medium text-white">
+                    {% if page_id %}
+                        From Page ID: &emsp; &emsp; &emsp; `{{page_id}}`
+                        <br/>
+                    {% endif %}
                     Current query: &emsp; &emsp; &emsp; `{{query}}`
                     <br/>
                     No. of doc returned: &emsp; `{{documents_num}}`
@@ -74,8 +78,11 @@
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
                                 </span>result {{doc.result_index}}
-                                <form action="http://localhost:8001/similar" method="get" class="get-similar-page">
-                                    <!-- <input type="text" name="query" placeholder="Search..." class="search-input" style="color:#222222" > -->
+                                <span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 mr-2 text-white rounded-full bg-blue-1300">
+                                </span>page_id: {{doc.page_id}}
+                                <form action="http://localhost:8001/search/similar" method="get" class="get-similar-page">
+                                    <input type="hidden" name="page_id" value={{doc.page_id}} >
                                     <button type="submit" class="get-similar-page-button">Get Similar Pages</button>
                                 </form>
                                 <style>
@@ -110,7 +117,7 @@
                         <div class="relative flex flex-col">
                             <button class="text-white transition duration-500 ease-in-out transform border rounded-lg text-md hover:bg-gray-900">
                                 <a href="{{doc.url}}">
-                                    Page Title: <u>{{doc.title}}</u>
+                                    Page Title: <u>{{doc.title}}</u> &emsp; &emsp; &emsp; 
                                 </a>
                             </button>
                         </div>

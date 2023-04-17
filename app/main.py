@@ -1,9 +1,9 @@
-from fastapi import FastAPI, APIRouter, Query, HTTPException, Request, Depends
+from fastapi import FastAPI, APIRouter, Query, Request
 from fastapi.templating import Jinja2Templates
 
 from app.search import views
 
-from typing import Optional, Any
+from typing import Optional
 from pathlib import Path
 
 from app.document_sample_data import SAMPLE_DOCUMENTS
@@ -58,26 +58,30 @@ def search_keywords(
         # we use Python list slicing to limit results
         # based on the max_results query parameter
         return TEMPLATES.TemplateResponse(
-        "index.html",
-        {"request": request, "documents": ""},
-    )
-
+            "index.html",
+            {"request": request, "documents_num": 0, "documents": ""},
+        )
+    
     print(">>> main.py | search_keywords() | Origin query: {}".format(query))
-
-    ### [x] get "ranked doc" by consine similarity between `input query` and `documents`
-    # ranked_doc = get_ranked_doc(query)
+    
+    ### get "ranked doc" by cosine similarity between `input query` and `documents`
     query_results = views.result(query)
     print(">>> main.py | search_keywords() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
-
+    
     query_results = query_results[:max_results]
     documents_num = len(query_results)
     print(">>> main.py | search_keywords() | len(query_results): {}".format(len(query_results)))
-
+    
     query_results = [{"result_index": i+1, **doc} for doc, i in zip(query_results, range(len(query_results)))]
     # return query_results
     return TEMPLATES.TemplateResponse(
         "index.html",
-        {"request": request, "query": query, "documents_num": documents_num, "documents": query_results},
+        {
+            "request": request,
+            "query": query,
+            "documents_num": documents_num,
+            "documents": query_results
+        },
     )
 
 
@@ -95,99 +99,65 @@ def search_keywords_test(
         # we use Python list slicing to limit results
         # based on the max_results query parameter
         return TEMPLATES.TemplateResponse(
-        "index.html",
-        {"request": request, "documents": ""},
-    )
-
-    ### [x] get "ranked doc" by consine similarity between `input query` and `documents`
-    # ranked_doc = getRankedDoc(query)
+            "index.html",
+            {"request": request, "documents_num": 0, "documents": ""},
+        )
+    
     ranked_doc = SAMPLE_DOCUMENTS
-
+    
     ### [ FAKE!!! ]
-    # results = filter(lambda recipe: query.lower() in recipe["label"].lower(), RECIPES)
     results = filter(lambda recipe: query.lower() in recipe["title"].lower(), ranked_doc)
     results = list(results)
     results = [{"result_index": i, **doc} for doc, i in zip(results, range(len(results)))]
     print(results)
     return TEMPLATES.TemplateResponse(
         "index.html",
-        {"request": request, "documents": results[:max_results]},
+        {
+            "request": request, 
+            "documents": results[:max_results]
+        },
     )
 
 
-# @api_router.get("/db/all/", status_code=200)
-# def get_db_all(
-#     *,
-#     max_results: Optional[int] = 10,
-# ) -> dict:
-#     conn = sqlite3.connect(SQLALCHEMY_DATABASE_NAME)
-#     conn.row_factory = sqlite3.Row
-#     query = """
-#         SELECT *
-#         FROM doc_info
-#         INNER JOIN parent_child_link
-#             ON parent_child_link.url_id = doc_info.url_id
-#     """
-#     records = conn.execute(query).fetchall()
-#     records = [{k: item[k] for k in item.keys()} for item in records]
-#     print(records)
-#     conn.close()
-#     return {"results": records[:max_results]}
-
-
-'''@api_router.get("/recipe/{recipe_id}", status_code=200, response_model=Recipe)
-def fetch_recipe(*, recipe_id: int) -> Any:
-    """
-    Fetch a single recipe by ID
-    """
-
-    result = [recipe for recipe in RECIPES if recipe["id"] == recipe_id]
-    if not result:
-        # the exception is raised, not returned - you will get a validation
-        # error otherwise.
-        raise HTTPException(
-            status_code=404, detail=f"Recipe with ID {recipe_id} not found"
-        )
-
-    return result[0]
-'''
-
-
-'''@api_router.get("/search/", status_code=200, response_model=RecipeSearchResults)
-def search_recipes(
+@api_router.get("/search/similar", status_code=200)
+def get_similar_pages(
     *,
-    keyword: Optional[str] = Query(None, min_length=3, example="chicken"),
-    max_results: Optional[int] = 10,
+    request: Request,
+    page_id: Optional[str] = Query(None, min_length=0, example=["comput", "scienc"]),
+    max_results: Optional[int] = 50,
 ) -> dict:
     """
-    Search for recipes based on label keyword
+    Search for documents based on top 5 most frequent keywords which are from one of the previous returned pages
     """
-    if not keyword:
+    if not page_id:
         # we use Python list slicing to limit results
         # based on the max_results query parameter
-        return {"results": RECIPES[:max_results]}
-
-    results = filter(lambda recipe: keyword.lower() in recipe["label"].lower(), RECIPES)
-    return {"results": list(results)[:max_results]}
-'''
-
-
-'''@api_router.post("/recipe/", status_code=201, response_model=Recipe)
-def create_recipe(*, recipe_in: RecipeCreate) -> dict:
-    """
-    Create a new recipe (in memory only)
-    """
-    new_entry_id = len(RECIPES) + 1
-    recipe_entry = Recipe(
-        id=new_entry_id,
-        label=recipe_in.label,
-        source=recipe_in.source,
-        url=recipe_in.url,
+        return TEMPLATES.TemplateResponse(
+            "index.html",
+            {"request": request, "documents_num": 0, "documents": ""},
+        )
+    print(">>> main.py | get_similar_pages() | Origin query: {}".format(page_id))
+    
+    ### get "ranked doc" by cosine similarity between `input query` and `documents`
+    query_results, top5_keywords = views.similar(page_id)
+    print(">>> main.py | get_similar_pages() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
+    
+    query_results = query_results[:max_results]
+    documents_num = len(query_results)
+    print(">>> main.py | get_similar_pages() | len(query_results): {}".format(len(query_results)))
+    
+    query_results = [{"result_index": i+1, **doc} for doc, i in zip(query_results, range(len(query_results)))]
+    # return query_results
+    return TEMPLATES.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "page_id": page_id,
+            "query": top5_keywords,
+            "documents_num": documents_num,
+            "documents": query_results
+        },
     )
-    RECIPES.append(recipe_entry.dict())
-
-    return recipe_entry
-'''
 
 
 app.include_router(api_router)
@@ -196,5 +166,5 @@ app.include_router(api_router)
 if __name__ == "__main__":
     # Use this for debugging purposes only
     import uvicorn
-
+    
     uvicorn.run(app, host="localhost", port=8001, log_level="debug")
