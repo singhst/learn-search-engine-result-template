@@ -27,9 +27,13 @@
                         From Page ID: &emsp; &emsp; &emsp; `{{page_id}}`
                         <br/>
                     {% endif %}
-                    Current query: &emsp; &emsp; &emsp; `{{query}}`
-                    <br/>
-                    No. of doc returned: &emsp; `{{documents_num}}`
+                    {% if query %}
+                        Current query: &emsp; &emsp; &emsp; `{{query}}`
+                        <br/>
+                    {% endif %}
+                    {% if documents_num %}
+                        No. of doc returned: &emsp; `{{documents_num}}`
+                    {% endif %}
                 </h3>
                 <style>
                     .search-form {
