@@ -21,8 +21,6 @@ forwardIndexTitle = SqliteDict('./app/db/title_forward_index.sqlite')
 invertedIndexTitle = SqliteDict('./app/db/title_inverted_index.sqlite')
 # PageID -> title_norm
 titleNorm = SqliteDict('./app/db/title_norm.sqlite')
-queries = ["comput", "scienc"]
-# queries = ["event"]
-# queries = ["test", "page"]
+queries = ["test", "page"]
 
 print(invertedIndex[1])
