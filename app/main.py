@@ -45,10 +45,10 @@ def root(request: Request) -> dict:
 
 
 @api_router.get("/search", status_code=200)
-def search_keywords(
+def search_by_keywords(
     *,
     request: Request,
-    query: Optional[str] = Query(None, min_length=0, example=["comput", "scienc"]),
+    query: Optional[str] = Query(None, min_length=0, example=["CSE", "department"]),
     max_results: Optional[int] = 50,
 ) -> dict:
     """
@@ -86,10 +86,10 @@ def search_keywords(
 
 
 @api_router.get("/search/test", status_code=200)
-def search_keywords_test(
+def search_by_keywords_test(
     *,
     request: Request,
-    query: Optional[str] = Query(None, min_length=0, example=["comput", "scienc"]),
+    query: Optional[str] = Query(None, min_length=0, example=["CSE", "department"]),
     max_results: Optional[int] = 50,
 ) -> dict:
     """
@@ -120,10 +120,10 @@ def search_keywords_test(
 
 
 @api_router.get("/search/similar", status_code=200)
-def get_similar_pages(
+def get_similar_pages_by_page_id(
     *,
     request: Request,
-    page_id: Optional[str] = Query(None, min_length=0, example=["comput", "scienc"]),
+    page_id: Optional[str] = Query(None, min_length=0, example=["CSE", "department"]),
     max_results: Optional[int] = 50,
 ) -> dict:
     """
