@@ -21,6 +21,8 @@ If you get stuck, checkout the [troubleshooting readme](../troubleshooting/READM
 
 # Demo Video
 
+https://youtu.be/0UH404rH6Lw
+
 https://user-images.githubusercontent.com/71545537/232531740-f6a453c8-545f-48b7-9ec7-dd93c0fe338e.mp4
 
 ---
