@@ -5,6 +5,7 @@ from sqlitedict import SqliteDict
 import re
 from string import punctuation
 import nltk
+from nltk import word_tokenize, pos_tag
 from nltk.stem import PorterStemmer
 ps = PorterStemmer()
 nltk.download('punkt')
@@ -53,17 +54,18 @@ def split_query_quot(queries):
 
 # convert splits to string
 def split_to_str(splits):
-    str_result = splits[0]
-    for i in range(len(splits)-1):
-        str_result += " " + splits[i+1]
-    return splits
+    # str_result = splits[0]
+    # for i in range(len(splits)-1):
+    #     str_result += " " + splits[i+1]
+    return " ".join(splits)
 
 # clean query text
 def clean_stem_query (tokens):
     punc_table = str.maketrans('', '', punctuation)    # remove punctuation
     tokens = [w.translate(punc_table) for w in tokens]
     tokens = [word.lower() for word in tokens] # convert to lower case
-    tokens = [re.sub('[^A-Za-z0-9]+', '', w) for w in tokens] 
+    tokens = [re.sub('[^A-Za-z0-9\s]+', '', w).strip() for w in tokens]
+    tokens = [re.sub('\s+', ' ', w) for w in tokens]
     tokens = [w for w in tokens if w != ''] 
     stop_words = stopwords
     tokens = [w for w in tokens if w not in stop_words] # remove stopwords
