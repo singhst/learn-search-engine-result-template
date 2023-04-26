@@ -192,7 +192,7 @@ def retrive_func(queries: List[str]):
         if pageID not in cos_sim_combined:
             cos_sim_combined[pageID] = score * 0.7
         else:
-            cos_sim_combined[pageID] += score* 0.7 + cos_sim_combined[pageID]*0.3 #weighted average
+            cos_sim_combined[pageID] = score* 0.7 + cos_sim_combined[pageID]*0.3 #weighted average
     
     # sort and filter top 50 pages for display
     cos_sim_combined_list = list(cos_sim_combined.items())
