@@ -21,9 +21,9 @@ If you get stuck, checkout the [troubleshooting readme](../troubleshooting/READM
 
 # Demo Video
 
-https://youtu.be/1C12WK_KdiI
+https://www.youtube.com/watch?v=ZTa8D6w3hbg
 
-https://user-images.githubusercontent.com/71545537/234304993-5a525b08-f40d-4aa4-aaeb-19abddac08d5.mp4
+https://user-images.githubusercontent.com/71545537/234554295-e2409013-5377-4894-bd97-d1557fc85ec0.mp4
 
 ---
 
