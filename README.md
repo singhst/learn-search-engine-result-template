@@ -27,6 +27,12 @@ https://user-images.githubusercontent.com/71545537/234554295-e2409013-5377-4894-
 
 ---
 
+## Further Improvement
+
+[How "sentence transformer" help search engine to find out the most relevant pages from the user's query? Explain and implement a python code as an example](https://poe.com/s/xa8aZDnr3tk2CCTKvYJD)
+
+
 ## Reference link 
 
 [link](https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-database-setup/)
+
