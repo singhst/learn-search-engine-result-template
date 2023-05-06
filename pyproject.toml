@@ -13,3 +13,4 @@ pydantic = {extras = ["email"], version = "~1.8.1"}
 Jinja2 = "^3.0.1"
 sqlitedict = "^2.1.0"
 nltk = "^3.8.1"
+bs4 = "^0.0.1"
