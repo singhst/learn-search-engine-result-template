@@ -22,11 +22,20 @@ To stop the server, press CTRL+C
 
 To run in Linux:
 ```shell
-poetry run python crawler_and_index_sqlitedict_v3_\(rectified_parent\).py
+$ pwd
+/xxxx/learn-search-engine-result-template
+
+$ pip install -r requirements.txt
+
+$ python crawler_and_index_sqlitedict.py
 ```
 
 
 ## (3) Indexer
+
+```shell
+$ 
+```
 
 # Demo Video
 
