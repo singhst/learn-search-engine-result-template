@@ -20,6 +20,11 @@ To stop the server, press CTRL+C
 
 ## (2) Crawler
 
+To run in Linux:
+```shell
+poetry run python crawler_and_index_sqlitedict_v3_\(rectified_parent\).py
+```
+
 
 ## (3) Indexer
 
