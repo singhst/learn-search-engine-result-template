@@ -18,6 +18,7 @@
 
 To stop the server, press CTRL+C
 
+
 ## (2) Crawler
 
 To run in Linux:
@@ -33,9 +34,16 @@ $ python crawler_and_index_sqlitedict.py
 
 ## (3) Indexer
 
+To run in Linux:
 ```shell
-$ 
+$ pwd
+/xxxx/learn-search-engine-result-template
+
+$ pip install -r requirements.txt
+
+$ python indexer-tfidf_v1.py
 ```
+
 
 # Demo Video
 
