@@ -17,22 +17,9 @@
 
 To stop the server, press CTRL+C
 
-If you get stuck, checkout the [troubleshooting readme](../troubleshooting/README.md)
 
 # Demo Video
 
 https://www.youtube.com/watch?v=ZTa8D6w3hbg
 
 https://user-images.githubusercontent.com/71545537/234554295-e2409013-5377-4894-bd97-d1557fc85ec0.mp4
-
----
-
-## Further Improvement
-
-[How "sentence transformer" help search engine to find out the most relevant pages from the user's query? Explain and implement a python code as an example](https://poe.com/s/xa8aZDnr3tk2CCTKvYJD)
-
-
-## Reference link 
-
-[link](https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-database-setup/)
-
