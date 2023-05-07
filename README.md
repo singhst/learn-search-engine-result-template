@@ -1,5 +1,7 @@
 # Local Setup for running
 
+Please use Python 3.9.
+
 ## (1) Crawler and Indexer
 
 To run in Linux:
