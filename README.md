@@ -9,9 +9,8 @@ $ pwd
 
 $ pip install -r requirements.txt
 
-### Normal version
-$ python crawler_and_index_sqlitedict.py
-$ python indexer-tfidf_v1.py
+$ python sentence_transformer_crawler.py
+$ python sentence_transformer_indexer.py
 ```
 
 
@@ -29,31 +28,9 @@ $ python indexer-tfidf_v1.py
 3. [UNIX]: Run the FastAPI server via poetry with the bash script: `poetry run ./run.sh`
 4. [WINDOWS]: Run the FastAPI server via poetry with the Python command: `poetry run run.sh`
 5. Open http://localhost:8001/
+6. Add `SENT_SEARCH: {text-to-query}` to the query in search bar if you want to levage the power of Sentence Transformer, otherwise makes the query `{text-to-query}` only to use the normal-version keyword search.
 
 To stop the server, press CTRL+C
-
-
-## (3) Crawler and Indexer (Sentence Transformer version)
-
-> ---
-> 
-> *NOT SUPPORT `GET SIMILAR PAGES` FEATURE*
->
-> ---
-
-To run in Linux:
-```shell
-$ pwd
-/xxxx/learn-search-engine-result-template
-
-$ pip install -r requirements.txt
-
-### Sentence Transformer version
-$ python sentence_transformer_crawler.py
-$ python sentence_transformer_indexer.py
-```
-
-Then go back to `(2) Search Engine - Web interface`, but must enter URL: `http://localhost:8001/search/sentence-transformer` in browser to use the Sentence Transformer searching feature.
 
 
 # Demo Video

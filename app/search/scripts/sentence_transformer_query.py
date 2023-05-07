@@ -57,9 +57,9 @@ stopwords = set([rows.rstrip('\n') for rows in stopword_file])
 def reformat_result(original_results: list):
     query_results = []
     for page in original_results:
-        score, title, url_full, last_modified_date, size, word_freq_list_top_5, parent, child = page
+        score, title, url_full, last_modified_date, size, word_freq_list_top_5, parent, child, pageID = page
         all_results = {
-                # "page_id": pageID,
+                "page_id": pageID,
                 "score": score,
                 "title": title,
                 "url": url_full,
@@ -68,6 +68,7 @@ def reformat_result(original_results: list):
                 "keywords": [{"term": term, "term_freq": term_freq} for term,term_freq in word_freq_list_top_5],
                 "parent_links": [{"url": url} for url in parent],
                 "child_links": [{"url": url} for url in child],
+                
         }
         query_results.append(all_results)
     return query_results
@@ -160,7 +161,7 @@ def process_query(query_text):
         topScoresPosition = [sorted(range(len(scores)),key=lambda x:scores[x],reverse=True)]
         topScore = list(np.array(scores)[topScoresPosition])[:n_page]
         topPages = list(np.array(docIDs)[topScoresPosition])[:n_page]
-        res = [[topScore[i],*getPageInfo(int(topPages[i]))] for i in range(len(topPages))]
+        res = [[topScore[i],*getPageInfo(int(topPages[i])),topPages[i]] for i in range(len(topPages))]
         return reformat_result(res)
     else:
         query_sent = query_text[12:]
@@ -180,7 +181,7 @@ def process_query(query_text):
                 sent_query_res.append([sentId,SentIdToPageid[sentId],SentIdToSent[sentId],cosSim(query_emb,SentIdToEmbedding[sentId])])
         res = sorted(sent_query_res,key = lambda x:-x[3])[:50] # in [sentId, pageId, Sentence, cosSim]
         # print(res)
-        res = [[res[i][3],*getPageInfo(res[i][1])] for i in range(len(res))] #is it posible to show the sentence in frontend?
+        res = [[res[i][3],*getPageInfo(res[i][1]),res[i][1]] for i in range(len(res))] #is it posible to show the sentence in frontend?
         return reformat_result(res)
 
 def getTop5_FreqWord(pageID):

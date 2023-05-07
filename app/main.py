@@ -62,61 +62,20 @@ def search_by_keywords(
             {"request": request, "documents_num": 0, "documents": ""},
         )
     
-    print(">>> main.py | search_keywords() | Origin query: {}".format(query))
+    print(">>> main.py | search_by_keywords() | Origin query: {}".format(query))
     
     ### get "ranked doc" by cosine similarity between `input query` and `documents`
     query_results = retrieve.result(query)
-    print(">>> main.py | search_keywords() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
+    print(">>> main.py | search_by_keywords() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
     
     query_results = query_results[:max_results]
     documents_num = len(query_results)
-    print(">>> main.py | search_keywords() | len(query_results): {}".format(len(query_results)))
+    print(">>> main.py | search_by_keywords() | len(query_results): {}".format(len(query_results)))
     
     query_results = [{"result_index": i+1, **doc} for doc, i in zip(query_results, range(len(query_results)))]
     # return query_results
     return TEMPLATES.TemplateResponse(
         "index.html",
-        {
-            "request": request,
-            "query": query,
-            "documents_num": documents_num,
-            "documents": query_results
-        },
-    )
-
-
-@api_router.get("/search/sentence-transformer", status_code=200)
-def search_by_sentence_transformer(
-    *,
-    request: Request,
-    query: Optional[str] = Query(None, min_length=0, example=["CSE", "department"]),
-    max_results: Optional[int] = 50,
-) -> dict:
-    """
-    Search for documents based on embeddings of query from sentence transformer 
-    """
-    if not query:
-        # we use Python list slicing to limit results
-        # based on the max_results query parameter
-        return TEMPLATES.TemplateResponse(
-            "index_sentence_transformer.html",
-            {"request": request, "documents_num": 0, "documents": ""},
-        )
-    
-    print(">>> main.py | search_by_sentence_transformer() | Origin query: {}".format(query))
-    
-    ### get "ranked doc" by cosine similarity between `input query` and `documents`
-    query_results = retrieve.resultSentenceTransformer(query)
-    print(">>> main.py | search_by_sentence_transformer() | str(query_results)[:200]: {}".format(str(query_results)[:200]))
-    
-    query_results = query_results[:max_results]
-    documents_num = len(query_results)
-    print(">>> main.py | search_by_sentence_transformer() | len(query_results): {}".format(len(query_results)))
-    
-    query_results = [{"result_index": i+1, **doc} for doc, i in zip(query_results, range(len(query_results)))]
-    # return query_results
-    return TEMPLATES.TemplateResponse(
-        "index_sentence_transformer.html",
         {
             "request": request,
             "query": query,
