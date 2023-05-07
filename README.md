@@ -11,8 +11,8 @@ $ pwd
 
 $ pip install -r requirements.txt
 
-$ python sentence_transformer_crawler.py
-$ python sentence_transformer_indexer.py
+$ python crawler.py
+$ python indexer.py
 ```
 
 
