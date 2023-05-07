@@ -1,6 +1,6 @@
 # Local Setup for running
 
-## (1) Search interface
+## (1) Search Engine - Web interface
 1. Current path:
     ```shell
     $ pwd
@@ -19,7 +19,7 @@
 To stop the server, press CTRL+C
 
 
-## (2) Crawler
+## (2) Crawler and Indexer
 
 To run in Linux:
 ```shell
@@ -28,20 +28,13 @@ $ pwd
 
 $ pip install -r requirements.txt
 
+### Normal version
 $ python crawler_and_index_sqlitedict.py
-```
-
-
-## (3) Indexer
-
-To run in Linux:
-```shell
-$ pwd
-/xxxx/learn-search-engine-result-template
-
-$ pip install -r requirements.txt
-
 $ python indexer-tfidf_v1.py
+
+### Sentence Transformer version
+$ python crawler_indexer_sentence_transformer.py
+$ python sent_transformer.py
 ```
 
 
