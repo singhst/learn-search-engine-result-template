@@ -1,8 +1,16 @@
 from typing import List
-from app.search.scripts import similarity_query
+from app.search.scripts import similarity_query, sentence_transformer_query
 from pathlib import Path
 
 BASE_PATH = Path(__file__).resolve().parent
+
+
+def resultSentenceTransformer(query: List[str]):
+    # query = "SENT_SEARCH: The British government acknowledges that it must take actions beyond addressing its domestic audience."
+    
+    print(">>> retrieve.py | resultSentenceTransformer() | Retriving pages ...")
+    query_results = sentence_transformer_query.process_query(query)
+    return query_results
 
 
 def result(query: List[str]):

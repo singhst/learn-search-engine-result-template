@@ -51,8 +51,28 @@ centroid_dict = SqliteDict(path_db + 'centroid_dict.sqlite')
 clusToSentId  = SqliteDict(path_db + 'clusToSentId.sqlite')
 
 # put stopwords in same folder
-stopword_file = open("stopwords.txt")
+stopword_file = open("./stopwords.txt")
 stopwords = set([rows.rstrip('\n') for rows in stopword_file])
+
+def reformat_result(original_results: list):
+    query_results = []
+    for page in original_results:
+        score, title, url_full, last_modified_date, size, word_freq_list_top_5, parent, child = page
+        all_results = {
+                # "page_id": pageID,
+                "score": score,
+                "title": title,
+                "url": url_full,
+                "last_modification_date": last_modified_date,
+                "size_of_page": size,
+                "keywords": [{"term": term, "term_freq": term_freq} for term,term_freq in word_freq_list_top_5],
+                "parent_links": [{"url": url} for url in parent],
+                "child_links": [{"url": url} for url in child],
+        }
+        query_results.append(all_results)
+    return query_results
+
+
 def extract_stemmed_word(textList,stopwordList = stopwords):
     res = [word.lower() for word in textList] # convert to lower case
     res = [re.sub('[^a-z0-9 ]+', '', w) for w in res]
@@ -124,7 +144,7 @@ def getPageInfo(docID):
 def process_query(query_text):
     if query_text[:12]!="SENT_SEARCH:":
         querylist = query_token(query_text)
-        print(querylist)
+        print(">>> sentence_transformer | process_query() | querylist: {}".format(querylist))
         titleSim = get_title_cosine(querylist)
         bodySim = get_body_cosine(querylist)
         titleBoostedSim = {}
@@ -141,7 +161,7 @@ def process_query(query_text):
         topScore = list(np.array(scores)[topScoresPosition])[:n_page]
         topPages = list(np.array(docIDs)[topScoresPosition])[:n_page]
         res = [[topScore[i],*getPageInfo(int(topPages[i]))] for i in range(len(topPages))]
-        return res
+        return reformat_result(res)
     else:
         query_sent = query_text[12:]
         query_emb = model.encode(query_sent)
@@ -159,9 +179,9 @@ def process_query(query_text):
                 sentId = int(sentId)
                 sent_query_res.append([sentId,SentIdToPageid[sentId],SentIdToSent[sentId],cosSim(query_emb,SentIdToEmbedding[sentId])])
         res = sorted(sent_query_res,key = lambda x:-x[3])[:50] # in [sentId, pageId, Sentence, cosSim]
-        print(res[1])
+        # print(res)
         res = [[res[i][3],*getPageInfo(res[i][1])] for i in range(len(res))] #is it posible to show the sentence in frontend?
-        return res
+        return reformat_result(res)
 
 def getTop5_FreqWord(pageID):
     pageDetails = pageID_details[pageID]
@@ -170,3 +190,8 @@ def getTop5_FreqWord(pageID):
     top5_words = list(np.array(words)[top5_tfsPosititon])
     return top5_words
 
+
+if __name__=="__main__":
+    query_text = "SENT_SEARCH: The British government acknowledges that it must take actions beyond addressing its domestic audience."
+    results = process_query(query_text)
+    print(">>> main | #results: {} | results: {}".format(len(results), results))

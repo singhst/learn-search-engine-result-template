@@ -1,6 +1,21 @@
 # Local Setup for running
 
-## (1) Search Engine - Web interface
+## (1) Crawler and Indexer
+
+To run in Linux:
+```shell
+$ pwd
+/xxxx/learn-search-engine-result-template
+
+$ pip install -r requirements.txt
+
+### Normal version
+$ python crawler_and_index_sqlitedict.py
+$ python indexer-tfidf_v1.py
+```
+
+
+## (2) Search Engine - Web interface
 1. Current path:
     ```shell
     $ pwd
@@ -19,7 +34,13 @@
 To stop the server, press CTRL+C
 
 
-## (2) Crawler and Indexer
+## (3) Crawler and Indexer (Sentence Transformer version)
+
+> ---
+> 
+> *NOT SUPPORT `GET SIMILAR PAGES` FEATURE*
+>
+> ---
 
 To run in Linux:
 ```shell
@@ -28,14 +49,12 @@ $ pwd
 
 $ pip install -r requirements.txt
 
-### Normal version
-$ python crawler_and_index_sqlitedict.py
-$ python indexer-tfidf_v1.py
-
 ### Sentence Transformer version
-$ python crawler_indexer_sentence_transformer.py
-$ python sent_transformer.py
+$ python sentence_transformer_crawler.py
+$ python sentence_transformer_indexer.py
 ```
+
+Then go back to `(2) Search Engine - Web interface`, but must enter URL: `http://localhost:8001/search/sentence-transformer?query=xxxx` in browser to use the Sentence Transformer searching feature.
 
 
 # Demo Video
