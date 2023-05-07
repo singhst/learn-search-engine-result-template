@@ -25,11 +25,10 @@ $ python indexer-tfidf_v1.py
     README.md               app                     pyproject.toml          run.sh                  stopwords.txt
     alembic.ini             poetry.lock             requirements.txt        sample_data             venv
     ```
-2. `pip install poetry==1.4.2` (or safer, follow the instructions: https://python-poetry.org/docs/#installation)
-3. Install dependencies `cd` into the directory where the `pyproject.toml` is located then `poetry install`
-4. [UNIX]: Run the FastAPI server via poetry with the bash script: `poetry run ./run.sh`
-5. [WINDOWS]: Run the FastAPI server via poetry with the Python command: `poetry run run.sh`
-6. Open http://localhost:8001/
+2. Go to the directory where the `pyproject.toml` is located then `poetry install`
+3. [UNIX]: Run the FastAPI server via poetry with the bash script: `poetry run ./run.sh`
+4. [WINDOWS]: Run the FastAPI server via poetry with the Python command: `poetry run run.sh`
+5. Open http://localhost:8001/
 
 To stop the server, press CTRL+C
 
@@ -54,7 +53,7 @@ $ python sentence_transformer_crawler.py
 $ python sentence_transformer_indexer.py
 ```
 
-Then go back to `(2) Search Engine - Web interface`, but must enter URL: `http://localhost:8001/search/sentence-transformer?query=xxxx` in browser to use the Sentence Transformer searching feature.
+Then go back to `(2) Search Engine - Web interface`, but must enter URL: `http://localhost:8001/search/sentence-transformer` in browser to use the Sentence Transformer searching feature.
 
 
 # Demo Video
