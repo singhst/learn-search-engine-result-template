@@ -1,3 +1,25 @@
+# System Overview
+
+Basic components of web-based search engine
+* **Crawler**: to fetch the pages recursively with breadth-first strategy
+* **Indexer**: to store information as collated by crawler
+* **Retrieval function and query handling**: to compile similarity between query term and documents stored, then return relevant documents
+
+![system-overview](img/system-overview.png "System Overview")
+
+1. User sends a query request from browser to server
+2. Server processes the query, retrieves related pages from database, renders .html
+3. Server returns .html back to browser
+4. Browser gets .html and shows up the search results 
+
+## Indexer with 
+
+# Demo Video
+
+https://www.youtube.com/watch?v=ZTa8D6w3hbg
+
+https://user-images.githubusercontent.com/71545537/234554295-e2409013-5377-4894-bd97-d1557fc85ec0.mp4
+
 # Local Setup for running
 
 Please use Python 3.9.
@@ -33,10 +55,3 @@ $ python indexer.py
 6. Add `SENT_SEARCH: {text-to-query}` to the query in search bar if you want to levage the power of Sentence Transformer, otherwise makes the query `{text-to-query}` only to use the normal-version keyword search.
 
 To stop the server, press CTRL+C
-
-
-# Demo Video
-
-https://www.youtube.com/watch?v=ZTa8D6w3hbg
-
-https://user-images.githubusercontent.com/71545537/234554295-e2409013-5377-4894-bd97-d1557fc85ec0.mp4
