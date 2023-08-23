@@ -8,7 +8,9 @@
         <div id="main" class="container px-5 py-12 mx-auto lg:px-20">
             <div class="flex flex-col flex-wrap pb-6 mb-12 text-white ">
                 <h1 class="mb-12 text-3xl font-medium text-white">
-                    Group 12
+                    <a href="http://localhost:8001">
+                        Group 12
+                    </a>
                 </h1>
                     <p class="text-base leading-relaxed">
                         Search...</p>
@@ -18,10 +20,23 @@
                     <input type="submit" value="Go" />
                 </form> -->
                 <!-- Generate by https://poe.com/s/BupsbPRFybPxfudMmVfG -->
-                <form action="http://0.0.0.0:8001/search" method="get" class="search-form">
+                <form action="http://localhost:8001/search" method="get" class="search-form">
                     <input type="text" name="query" placeholder="Search..." class="search-input" style="color:#222222" >
                     <button type="submit" class="search-button">Search</button>
                 </form>
+                <h3 class="mb-12 text-2xl font-medium text-white">
+                    {% if page_id %}
+                        From Page ID: &emsp; &emsp; &emsp; `{{page_id}}`
+                        <br/>
+                    {% endif %}
+                    {% if query %}
+                        Current query: &emsp; &emsp; &emsp; `{{query}}`
+                        <br/>
+                    {% endif %}
+                    {% if documents_num %}
+                        No. of doc returned: &emsp; `{{documents_num}}`
+                    {% endif %}
+                </h3>
                 <style>
                     .search-form {
                         display: flex;
@@ -69,6 +84,26 @@
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
                                 </span>result {{doc.result_index}}
+                                <span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 mr-2 text-white rounded-full bg-blue-1300">
+                                </span>page_id: {{doc.page_id}}
+                                <form action="http://localhost:8001/search/similar" method="get" class="get-similar-page">
+                                    <input type="hidden" name="page_id" value={{doc.page_id}} >
+                                    <button type="submit" class="get-similar-page-button">Get Similar Pages</button>
+                                </form>
+                                <style>
+                                    .get-similar-page-button {
+                                        height: 40px;
+                                        padding: 10px 20px;
+                                        border: none;
+                                        border-radius: 20px;
+                                        background-color: #007bff;
+                                        color: white;
+                                        font-size: 16px;
+                                        font-family: Arial, sans-serif;
+                                        cursor: pointer;
+                                    }
+                                </style>
                             </p>
                         </div>
                     </div>
@@ -88,7 +123,7 @@
                         <div class="relative flex flex-col">
                             <button class="text-white transition duration-500 ease-in-out transform border rounded-lg text-md hover:bg-gray-900">
                                 <a href="{{doc.url}}">
-                                    Page Title: <u>{{doc.title}}</u>
+                                    Page Title: <u>{{doc.title}}</u> &emsp; &emsp; &emsp; 
                                 </a>
                             </button>
                         </div>

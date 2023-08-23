@@ -1,13 +1,18 @@
 [tool.poetry]
 name = "app"
 version = "0.0.1"
-description = "Ultimate FastAPI Tutorial"
-authors = ["ChristopherGS"]
+description = "Search Engine - FastAPI"
+authors = ["Group12"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8,<3.11"
 uvicorn = "~0.11.3"
 fastapi = "~0.68.0"
 python-multipart = "~0.0.5"
 pydantic = {extras = ["email"], version = "~1.8.1"}
-Jinja2 = "^3.0.1"
+Jinja2 = "3.0.3"
+sqlitedict = "^2.1.0"
+nltk = "^3.8.1"
+bs4 = "^0.0.1"
+sentence-transformers = "2.2.2"
+numpy = "1.21.6"
