@@ -55,3 +55,14 @@ $ python indexer.py
 6. Add `SENT_SEARCH: {text-to-query}` to the query in search bar if you want to levage the power of Sentence Transformer, otherwise makes the query `{text-to-query}` only to use the normal-version keyword search.
 
 To stop the server, press CTRL+C
+
+---
+
+## Further Improvement
+
+[How "sentence transformer" help search engine to find out the most relevant pages from the user's query? Explain and implement a python code as an example](https://poe.com/s/xa8aZDnr3tk2CCTKvYJD)
+
+
+## Reference link 
+
+[link](https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-database-setup/)
